@@ -12,7 +12,7 @@ __pycache__/
 *.pyc
 .pytest_cache/
 
-# 暫存
+# 暫存與快取
 *.tmp
 *.log
-data/signal_state_*.json
+data/
