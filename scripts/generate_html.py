@@ -46,6 +46,7 @@ PAIR_LINKS = {
     "P01": "https://yoshiagent.github.io/nan-xin-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
     "P02": "https://yoshiagent.github.io/liteone-delta-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
     "P03": "https://yoshiagent.github.io/qihong-shuanghong-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
+    "P04": "https://yoshiagent.github.io/tg-lm-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
     "P05": "https://yoshiagent.github.io/quanta-wistron-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
     "P06": "https://yoshiagent.github.io/giant-merida-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
     "P07": "https://yoshiagent.github.io/shang-da-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
