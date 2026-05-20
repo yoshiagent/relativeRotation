@@ -44,6 +44,7 @@ def pair_chart_data(metrics: pd.DataFrame, pair_id: str, n: int = 120):
 # 各配對的外部詳細頁連結（換股線圖等）。沒設定者保持純文字。
 PAIR_LINKS = {
     "P01": "https://yoshiagent.github.io/nan-xin-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
+    "P06": "https://yoshiagent.github.io/giant-merida-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
 }
 
 
