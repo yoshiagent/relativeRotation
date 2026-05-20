@@ -273,6 +273,31 @@ tbody tr:hover {{ background: rgba(88,166,255,0.05); }}
 .td-highlight {{ color: var(--highlight); font-weight: 600; }}
 .td-warn {{ color: var(--warn); font-weight: 600; }}
 .td-danger {{ color: var(--danger); font-weight: 600; }}
+.strategy-doc details {{ background: var(--panel); border: 1px solid var(--border);
+  border-radius: 6px; margin-bottom: 10px; padding: 0; }}
+.strategy-doc summary {{ cursor: pointer; padding: 12px 16px; font-weight: 600;
+  font-size: 14px; color: var(--accent); user-select: none; list-style: none; position: relative; }}
+.strategy-doc summary::-webkit-details-marker {{ display: none; }}
+.strategy-doc summary::before {{ content: "▶"; display: inline-block; margin-right: 8px;
+  font-size: 10px; transition: transform 0.15s; color: var(--muted); }}
+.strategy-doc details[open] > summary::before {{ transform: rotate(90deg); }}
+.strategy-doc summary:hover {{ background: rgba(88,166,255,0.05); }}
+.doc-body {{ padding: 4px 20px 16px 36px; font-size: 13px; line-height: 1.7; }}
+.doc-body p {{ margin: 6px 0; }}
+.doc-body code {{ background: var(--bg); border: 1px solid var(--border);
+  padding: 2px 6px; border-radius: 3px; font-family: "Consolas", monospace; font-size: 12px; }}
+.doc-body .quote {{ border-left: 3px solid var(--accent); padding: 4px 12px;
+  color: var(--muted); font-style: italic; margin: 12px 0; }}
+.doc-body ol.rules, .doc-body ul.rules {{ padding-left: 20px; margin: 8px 0; }}
+.doc-body ol.rules li, .doc-body ul.rules li {{ margin: 4px 0; }}
+.doc-body .rule-tier {{ width: 100%; margin: 12px 0; border-collapse: collapse;
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }}
+.doc-body .rule-tier th {{ background: rgba(88,166,255,0.08); color: var(--fg);
+  padding: 8px 12px; text-align: left; font-size: 12px; border-bottom: 1px solid var(--border); }}
+.doc-body .rule-tier td {{ padding: 6px 12px; border-bottom: 1px solid var(--border); font-size: 13px; }}
+.doc-body .rule-tier tr:last-child td {{ border-bottom: none; }}
+.star-inline {{ background: var(--highlight); color: #000; padding: 2px 8px;
+  border-radius: 3px; font-size: 12px; font-weight: bold; }}
 footer {{ margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border);
   color: var(--muted); font-size: 12px; text-align: center; }}
 footer a {{ color: var(--accent); text-decoration: none; }}
@@ -312,6 +337,132 @@ footer .local-path code {{ background: var(--panel); border: 1px solid var(--bor
 <section>
 <h2>⚠️ 風險訊號（9 項條件）</h2>
 {risk_html}
+</section>
+
+<section class="strategy-doc">
+<h2>📖 策略邏輯說明</h2>
+
+<details open>
+<summary>核心理念</summary>
+<div class="doc-body">
+<p>本策略屬於 <b>Long-only Pair Rotation</b>（雙多頭相對輪動），非放空、非市場中性、非高頻交易。
+透過同產業/同主題的兩檔股票配對，利用 <b>資金輪動</b> 造成的相對低估，
+搭配 <b>趨勢、波動率差、均值回歸、Relative Strength</b> 找出「準備補漲」的標的。</p>
+<p class="quote">不預測漲跌，而是尋找資金輪動造成的相對低估。</p>
+</div>
+</details>
+
+<details open>
+<summary>配對與 Ratio 定義</summary>
+<div class="doc-body">
+<p><code>Ratio = StockA 收盤價 / StockB 收盤價</code></p>
+<p>Ratio 偏低（Z-score 為負）：A 相對於 B 被低估 → 可能換股至 A。<br>
+Ratio 偏高（Z-score 為正）：A 相對於 B 偏貴 → 可能減碼 A、回補 B。</p>
+<p>換股以 <b>等資金</b> 而非等股數。例：台達電 500 元一張 ≈ 光寶科 100 元 5 張。</p>
+</div>
+</details>
+
+<details>
+<summary>✅ 進場訊號 — 10 項條件</summary>
+<div class="doc-body">
+<ol class="rules">
+<li>Ratio 的 <b>60日 Z-score &lt; -2</b>（A 相對弱過頭）</li>
+<li><b>低檔翻揚</b>：Z-score 上升 + Ratio 站回 5 日均線</li>
+<li><b>雙週 MA20 皆向上</b>（A、B 兩檔週線都在多頭趨勢）</li>
+<li><b>週 MA20 斜率 &gt; 0</b>（近 4 週持續上升）</li>
+<li><b>月 K 線剛脫離長期整理</b>（月收創 12 個月新高）</li>
+<li><b>週 K 線 Higher Low</b>（近 4 週低點 &gt; 前 4 週低點）</li>
+<li><b>日 K 量縮修正</b>（A 收盤 &lt; MA20 且當日量 &lt; 20 日均量）</li>
+<li><b>修正量 &lt; 上漲量</b>（跌日均量 &lt; 漲日均量）</li>
+<li><b>20 日均量 &gt; 60 日均量</b>（資金進場）</li>
+<li><b>加權指數位於週 MA20 之上</b>（大盤多頭）</li>
+</ol>
+<table class="rule-tier">
+<thead><tr><th>判定等級</th><th>達成條件</th><th>顏色</th></tr></thead>
+<tbody>
+<tr><td>✓ 強烈進場</td><td>Z &lt; -2 且 達成 ≥ 8 項</td><td class="td-good">綠</td></tr>
+<tr><td>○ 適合進場</td><td>Z &lt; -1.5 且 達成 ≥ 6 項</td><td class="td-highlight">橘</td></tr>
+<tr><td>△ 觀察</td><td>Z &lt; -1 且 達成 ≥ 4 項</td><td class="td-warn">黃</td></tr>
+<tr><td>× 不適合</td><td>Z ≥ 0 或條件不足</td><td class="td-danger">紅</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<details>
+<summary>⚠️ 風險訊號 — 9 項條件</summary>
+<div class="doc-body">
+<ol class="rules">
+<li><b>Correlation(60) &lt; 0.65</b>（配對相關性下降，警示）</li>
+<li><b>Correlation(60) &lt; 0.5</b>（配對失效 → 停止操作）</li>
+<li><b>A 股距 MA20 乖離 &gt; 20%</b>（A 過熱）</li>
+<li><b>B 股距 MA20 乖離 &gt; 20%</b>（B 過熱）</li>
+<li><b>A 週 MA20 轉平/下彎</b>（A 趨勢失效）</li>
+<li><b>B 週 MA20 轉平/下彎</b>（B 趨勢失效）</li>
+<li><b>加權指數跌破週 MA20</b>（大盤風險）</li>
+<li><b>Ratio 突破 120 日布林上緣 + 爆量</b>（結構性脫鉤）</li>
+<li><b>時間停損</b>：Z&lt;-2 後 20~30 個交易日仍未回到 -0.5 以內</li>
+</ol>
+<table class="rule-tier">
+<thead><tr><th>判定等級</th><th>觸發條件</th><th>顏色</th></tr></thead>
+<tbody>
+<tr><td>🛑 停止操作</td><td>觸發 ②、⑦ 或 ⑧ 任一項</td><td class="td-danger">紅</td></tr>
+<tr><td>⚠ 降碼</td><td>其餘條件中觸發 ≥ 2 項</td><td class="td-warn">黃</td></tr>
+<tr><td>✓ 繼續</td><td>觸發 &lt; 2 項</td><td class="td-good">綠</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<details>
+<summary>📊 位置判定 — 7 階段</summary>
+<div class="doc-body">
+<table class="rule-tier">
+<thead><tr><th>Z-score 區間</th><th>位置</th><th>意義</th></tr></thead>
+<tbody>
+<tr><td>任一股 MA20 乖離 &gt; 20%</td><td>過熱段</td><td>避免追價</td></tr>
+<tr><td>Z &lt; -2</td><td>修正段（低估）</td><td>準備進場觀察</td></tr>
+<tr><td>-2 ≤ Z &lt; -1</td><td>重新轉強</td><td>補漲訊號區</td></tr>
+<tr><td>-1 ≤ Z &lt; 0</td><td>主升初段</td><td>趨勢確立</td></tr>
+<tr><td>0 ≤ Z &lt; 1</td><td>主升中段</td><td>持有續抱</td></tr>
+<tr><td>1 ≤ Z &lt; 2</td><td>主升末段</td><td>準備減碼</td></tr>
+<tr><td>Z ≥ 2</td><td>過熱段（強勢）</td><td>減碼回補</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<details>
+<summary>⭐ 補漲標記觸發邏輯</summary>
+<div class="doc-body">
+<p>同時滿足下列三項時，配對卡片右上角會出現 <span class="star-inline">★ 即將補漲</span>：</p>
+<ol class="rules">
+<li><b>Z-score &lt; -1.5</b>（明確低估）</li>
+<li>進場訊號達 <b>觀察或進場</b> 等級以上</li>
+<li><b>無停止操作</b>風險訊號</li>
+</ol>
+<p>此標記代表「最像即將開始補漲」的候選，建議搭配當日成交量、新聞面再做最終判斷。</p>
+</div>
+</details>
+
+<details>
+<summary>🎯 交易哲學與重要原則</summary>
+<div class="doc-body">
+<ul class="rules">
+<li>優先 <b>趨勢向上</b> 的股票（雙多頭環境）</li>
+<li>避免 <b>空頭中的均值回歸</b>（接刀風險）</li>
+<li>優先 <b>月線剛突破整理</b> 的標的</li>
+<li>優先 <b>週線 Higher Low</b> 結構</li>
+<li>優先 <b>日線量縮修正</b>（健康回測）</li>
+<li>避免 <b>爆量情緒末升段</b>（追高風險）</li>
+<li>避免 <b>新聞極度熱門後追價</b></li>
+<li>重視 <b>成交量與資金流向</b></li>
+<li>重視 <b>法人型慢牛股</b></li>
+<li>核心是 <b>Relative Rotation</b>，而非猜大盤</li>
+</ul>
+</div>
+</details>
+
 </section>
 
 <footer>
