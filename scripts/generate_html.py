@@ -41,6 +41,12 @@ def pair_chart_data(metrics: pd.DataFrame, pair_id: str, n: int = 120):
     }
 
 
+# 各配對的外部詳細頁連結（換股線圖等）。沒設定者保持純文字。
+PAIR_LINKS = {
+    "P01": "https://yoshiagent.github.io/nan-xin-pairs-trading/%E6%8F%9B%E8%82%A1%E7%B7%9A%E5%9C%96_%E4%BA%92%E5%8B%95%E7%89%88.html",
+}
+
+
 def phase_color(phase: str) -> str:
     if "過熱" in phase: return "danger"
     if "低估" in phase or "轉強" in phase: return "good"
@@ -64,11 +70,17 @@ def render_card(row, charts) -> str:
     star_html = f'<div class="star">{star}</div>' if star else ""
     pid = row["配對ID"]
     chart_id = f"chart_{pid}"
+    link = PAIR_LINKS.get(pid)
+    if link:
+        pid_html = (f'<a class="pid pid-link" href="{link}" target="_blank" rel="noopener">'
+                    f'{pid} <span class="link-icon">↗</span></a>')
+    else:
+        pid_html = f'<div class="pid">{pid}</div>'
     return f"""
     <div class="card">
         <div class="card-head">
             <div>
-                <div class="pid">{pid}</div>
+                {pid_html}
                 <div class="theme">{row.get("主題", "")}</div>
             </div>
             {star_html}
@@ -218,6 +230,10 @@ header .meta {{ color: var(--muted); font-size: 13px; }}
   border-radius: 8px; padding: 16px; }}
 .card-head {{ display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }}
 .pid {{ font-size: 18px; font-weight: bold; color: var(--accent); }}
+.pid-link {{ text-decoration: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+  border-bottom: 1px dashed transparent; transition: border-color 0.15s; }}
+.pid-link:hover {{ border-bottom-color: var(--accent); }}
+.link-icon {{ font-size: 13px; opacity: 0.65; }}
 .theme {{ color: var(--muted); font-size: 13px; }}
 .star {{ background: var(--highlight); color: #000; padding: 4px 8px;
   border-radius: 4px; font-size: 12px; font-weight: bold; animation: pulse 2s infinite; }}
