@@ -75,6 +75,10 @@ tbody tr:hover { background: rgba(88,166,255,0.05); }
 footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border);
   color: var(--muted); font-size: 12px; text-align: center; }
 footer a { color: var(--accent); text-decoration: none; }
+footer .local-path { margin-top: 8px; }
+footer .local-path code { background: var(--panel); border: 1px solid var(--border);
+  padding: 2px 8px; border-radius: 4px; color: var(--fg); font-size: 12px;
+  font-family: "Consolas", "Courier New", monospace; }
 </style>
 </head>
 <body>
@@ -82,7 +86,7 @@ footer a { color: var(--accent); text-decoration: none; }
 <header>
 <div>
   <h1>台股雙多頭 Relative Rotation 儀表板</h1>
-  <div class="meta">資料日期 <strong>2026-05-20 00:00:00</strong> · 最後更新 2026-05-20 21:55</div>
+  <div class="meta">資料日期 <strong>2026-05-20 00:00:00</strong> · 最後更新 2026-05-20 22:12</div>
 </div>
 <div class="meta">5 組配對 · 60日 Z-score · 滾動 Bollinger</div>
 </header>
@@ -344,6 +348,7 @@ footer a { color: var(--accent); text-decoration: none; }
 <footer>
 <p>策略：Long-only Pair Rotation · 不放空、不對沖、不預測大盤</p>
 <p>本網頁僅為個人研究紀錄，不構成投資建議 · <a href="https://github.com/yoshiagent/relativeRotation">原始碼</a></p>
+<p class="local-path">本機資料夾：<code>C:\CludeHome\projects\relativeRotation</code></p>
 </footer>
 </div>
 

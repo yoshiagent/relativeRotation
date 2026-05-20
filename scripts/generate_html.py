@@ -276,6 +276,10 @@ tbody tr:hover {{ background: rgba(88,166,255,0.05); }}
 footer {{ margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border);
   color: var(--muted); font-size: 12px; text-align: center; }}
 footer a {{ color: var(--accent); text-decoration: none; }}
+footer .local-path {{ margin-top: 8px; }}
+footer .local-path code {{ background: var(--panel); border: 1px solid var(--border);
+  padding: 2px 8px; border-radius: 4px; color: var(--fg); font-size: 12px;
+  font-family: "Consolas", "Courier New", monospace; }}
 </style>
 </head>
 <body>
@@ -313,6 +317,7 @@ footer a {{ color: var(--accent); text-decoration: none; }}
 <footer>
 <p>策略：Long-only Pair Rotation · 不放空、不對沖、不預測大盤</p>
 <p>本網頁僅為個人研究紀錄，不構成投資建議 · <a href="https://github.com/yoshiagent/relativeRotation">原始碼</a></p>
+<p class="local-path">本機資料夾：<code>C:\\CludeHome\\projects\\relativeRotation</code></p>
 </footer>
 </div>
 
