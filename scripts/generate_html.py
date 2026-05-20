@@ -14,7 +14,7 @@ from openpyxl import load_workbook
 ROOT = Path(r"C:\CludeHome\projects\relativeRotation")
 XLSX = ROOT / "相對輪動模型.xlsx"
 CSV  = ROOT / "data" / "prices_daily.csv"
-SITE = ROOT / "site"
+SITE = ROOT / "docs"  # GitHub Pages 支援 / 與 /docs
 SITE.mkdir(exist_ok=True)
 
 

@@ -27,7 +27,7 @@ python "scripts\notify_email.py"
 
 echo.
 echo [4/4] 部署到 GitHub Pages...
-git add -A site/ scripts/ README.md .gitignore .env.example update.bat
+git add -A docs/ scripts/ README.md .gitignore .env.example update.bat
 git diff --cached --quiet
 if errorlevel 1 (
     git commit -m "daily update %date% %time%"
