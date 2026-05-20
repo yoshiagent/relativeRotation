@@ -10,6 +10,11 @@ cd /d "%~dp0"
 set PYTHONIOENCODING=utf-8
 
 echo.
+echo [0/4] Releasing Excel lock if any...
+powershell -ExecutionPolicy Bypass -NoProfile -File "scripts\close_workbook.ps1"
+if errorlevel 1 goto :fail
+
+echo.
 echo [1/4] Fetching data and computing metrics...
 python "scripts\update_data.py" --days 400
 if errorlevel 1 goto :fail
