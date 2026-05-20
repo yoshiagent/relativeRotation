@@ -1,0 +1,18 @@
+# 機密
+.env
+*.pem
+*.key
+
+# 原始 Excel（990KB 二進位，不適合 git）
+相對輪動模型.xlsx
+~$*.xlsx
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# 暫存
+*.tmp
+*.log
+data/signal_state_*.json
