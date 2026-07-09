@@ -25,8 +25,8 @@ python "scripts\generate_html.py"
 if errorlevel 1 goto :fail
 
 echo.
-echo [3/4] Checking signal changes and sending email...
-python "scripts\notify_email.py"
+echo [3/4] Email notify DISABLED (2026-07-09 per user request; uncomment to resume)
+REM python "scripts\notify_email.py"
 
 echo.
 echo [4/4] Deploying to GitHub Pages...
